@@ -707,7 +707,7 @@ public struct ViewStoreTask: Hashable, Sendable {
   /// Cancels the underlying task and waits for it to finish.
   public func cancel() async {
     self.rawValue?.cancel()
-    await self.finish()
+    await self.rawValue?.value
   }
 
   /// Waits for the task to finish.
