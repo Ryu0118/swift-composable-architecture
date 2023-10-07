@@ -222,6 +222,15 @@ public struct PresentationStore<
             : nil
         },
         compactSend: {
+          print(
+            #function,
+            $0,
+            self.viewStore.wrappedValue,
+            id,
+            self.viewStore.state,
+            self.toID(self.viewStore.state),
+            self.toID(self.viewStore.state) == id
+          )
           guard
             $0 == nil,
             self.viewStore.wrappedValue != nil,
