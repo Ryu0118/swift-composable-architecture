@@ -221,7 +221,7 @@ public struct PresentationStore<
             ? toID($0).map { AnyIdentifiable(Identified($0) { $0 }) }
             : nil
         },
-        compactSend: {
+        compactSend: { [id] in
           guard
             $0 == nil,
             self.viewStore.wrappedValue != nil,
