@@ -58,7 +58,7 @@ extension View {
     self.presentation(
       store: store,
       state: toDestinationState,
-      id: { $0.wrappedValue.map(NavigationDestinationID.init) },
+      id: { NavigationDestinationID.init($0.storage) },
       action: fromDestinationAction
     ) { `self`, $item, destinationContent in
       self.navigationDestination(isPresented: $item.isPresent()) {
@@ -70,10 +70,8 @@ extension View {
 
 private struct NavigationDestinationID: Hashable {
   let objectIdentifier: ObjectIdentifier
-  let enumTag: UInt32?
 
-  init<Value>(_ value: Value) {
-    self.objectIdentifier = ObjectIdentifier(Value.self)
-    self.enumTag = EnumMetadata(Value.self)?.tag(of: value)
+  init<Value: AnyObject>(_ value: Value) {
+    self.objectIdentifier = ObjectIdentifier(value)
   }
 }

@@ -45,14 +45,14 @@ import Combine
 /// using optionals and enums.
 @propertyWrapper
 public struct PresentationState<State> {
-  private class Storage: @unchecked Sendable {
+  class Storage: @unchecked Sendable {
     var state: State?
     init(state: State?) {
       self.state = state
     }
   }
 
-  private var storage: Storage
+  var storage: Storage
   @usableFromInline var presentedID: NavigationIDPath?
 
   public init(wrappedValue: State?) {
