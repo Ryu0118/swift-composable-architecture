@@ -213,6 +213,11 @@ public struct PresentationStore<
   }
 
   public var body: some View {
+    if #available(iOS 15.0, *) {
+      let _ = Self._printChanges()
+    } else {
+      // Fallback on earlier versions
+    }
     let id = self.toID(self.viewStore.state)
     self.content(
       self.viewStore.binding(
@@ -231,12 +236,11 @@ public struct PresentationStore<
 //            self.toID(self.viewStore.state),
 //            self.toID(self.viewStore.state) == id
 //          )
-          print("$0:", $0)
           print("self.viewStore.wrappedValue:", self.viewStore.wrappedValue)
           print("id:", id)
           print("self.viewStore.state:", self.viewStore.state)
           print("self.toID(self.viewStore.state)", self.toID(self.viewStore.state))
-          print("self.toID(self.viewStore.state) == id", id)
+          print("self.toID(self.viewStore.state) == id", self.toID(self.viewStore.state) == id)
           guard
             $0 == nil,
             self.viewStore.wrappedValue != nil,
